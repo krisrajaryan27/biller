@@ -17,7 +17,7 @@ How to run the application?
      - mvn clean install
      - java -jar target/biller.jar
 - Once the application is up and running, you can test it through postman by passing the API Key and Token
-API Key is = X-API-KEY
-Token is = SetuBillerConsumerKrishna
+- API Key is = X-API-KEY
+- Token is = SetuBillerConsumerKrishna
     
 
