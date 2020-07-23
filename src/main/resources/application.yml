@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     initialization-mode: always
     password: root
-    url: jdbc:mysql://localhost:3306/biller?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    url: mysql://bed7dd0a0c866a:81c1d54b@us-cdbr-east-02.cleardb.com/heroku_e7fd44431ed4a51?reconnect=true
     username: root
   jpa:
     database: mysql
