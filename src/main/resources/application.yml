@@ -1,0 +1,17 @@
+server:
+  port: 8087
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+    password: atheer
+    url: jdbc:mysql://localhost:3306/biller?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true

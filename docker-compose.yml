@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  biller-mysql:
+    container_name: biller-mysql
+    image: mysql:5.7
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: biller
+      MYSQL_USER: setu
+      MYSQL_PASSWORD: setu
+      MYSQL_ROOT_PASSWORD: root
+    command: mysqld --lower_case_table_names=1 --skip-ssl
