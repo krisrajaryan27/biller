@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     initialization-mode: always
-    password: atheer
+    password: root
     url: jdbc:mysql://localhost:3306/biller?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
     username: root
   jpa:
