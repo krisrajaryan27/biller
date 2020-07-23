@@ -72,6 +72,14 @@ public class BillPaymentServiceImpl implements BillPaymentService {
         Optional<Customer> customerByRefID = billPaymentRepository.findByRefID(billPaymentRequest.getRefID());
         if (customerByRefID.isPresent()) {
             Customer customer = customerByRefID.get();
+            BillPaymentUpdateResponse billPaymentUpdateResponse = new BillPaymentUpdateResponse();
+            PaymentAcknowledgement paymentAcknowledgement = new PaymentAcknowledgement();
+            if (customer.isPaid()) {
+                billPaymentUpdateResponse.setStatus(Constants.SUCCESS);
+                paymentAcknowledgement.setAckID(customer.getAckID());
+                billPaymentUpdateResponse.setData(paymentAcknowledgement);
+                return billPaymentUpdateResponse;
+            }
             customer.setAckID(String.valueOf(UUID.randomUUID()));
             if (!transaction.getAmountPaid().equals(customer.getDueAmount())) {
                 log.error("Amount sent for payment of bill does not matches with due amount!");
@@ -80,10 +88,9 @@ public class BillPaymentServiceImpl implements BillPaymentService {
             customer.setAmountPaid(transaction.getAmountPaid());
             customer.setDate(transaction.getDate());
             customer.setDueAmount("0");
+            customer.setPaid(true);
             billPaymentRepository.save(customer);
-            BillPaymentUpdateResponse billPaymentUpdateResponse = new BillPaymentUpdateResponse();
             billPaymentUpdateResponse.setStatus(Constants.SUCCESS);
-            PaymentAcknowledgement paymentAcknowledgement = new PaymentAcknowledgement();
             paymentAcknowledgement.setAckID(customer.getAckID());
             billPaymentUpdateResponse.setData(paymentAcknowledgement);
             return billPaymentUpdateResponse;

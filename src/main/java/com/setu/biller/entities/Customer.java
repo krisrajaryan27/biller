@@ -49,4 +49,7 @@ public class Customer implements Serializable {
     @Column(name = "date")
     private String date;
 
+    @Column(name = "paid")
+    private boolean paid;
+
 }

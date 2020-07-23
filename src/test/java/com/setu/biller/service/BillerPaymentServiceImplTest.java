@@ -68,6 +68,23 @@ class BillerPaymentServiceImplTest {
     }
 
     @Test
+    void testUpdatePaymentWhenAlreadyPaid() throws BillerException {
+        customer.setPaid(true);
+        when(billPaymentRepository.findByRefID(customer.getRefID())).thenReturn(Optional.of(customer));
+        BillPaymentRequest billPaymentRequest = new BillPaymentRequest();
+        billPaymentRequest.setRefID(customer.getRefID());
+        Transaction transaction = new Transaction();
+        transaction.setAmountPaid(customer.getDueAmount());
+        transaction.setDate(customer.getDueDate());
+        transaction.setId(UUID.randomUUID().toString());
+        billPaymentRequest.setTransaction(transaction);
+        BillPaymentUpdateResponse billPaymentUpdateResponse = billPaymentService.updatePayment(billPaymentRequest);
+        assert billPaymentUpdateResponse != null;
+        assertEquals(SUCCESS, billPaymentUpdateResponse.getStatus());
+        customer.setPaid(false);
+    }
+
+    @Test
     void testUpdatePaymentWhenBillPaymentRequestIsNull() {
         Assertions.assertThrows(BillerException.class, () -> billPaymentService.updatePayment(null), Constants.INVALID_API_PARAMETERS);
     }

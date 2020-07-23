@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS `CUSTOMER`
     `REF_ID`        VARCHAR(200),
     `AMOUNT_PAID`   VARCHAR(20),
     `ACK_ID`        VARCHAR(200),
-    `DATE`          VARCHAR(20)
+    `DATE`          VARCHAR(20),
+    `PAID`          BOOLEAN
 );
